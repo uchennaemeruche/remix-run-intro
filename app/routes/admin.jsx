@@ -1,7 +1,8 @@
 
-import { Link, useLoaderData } from "remix";
+import { Outlet,Link, useLoaderData } from "remix";
 import { getPosts } from "~/post";
 import { getPostsFromDB } from "~/repository/db.posts";
+import { getPostsFromFS } from "~/repository/fs.posts";
 import adminStyles from "~/styles/admin.css";
 
 export const links = () => {
@@ -9,7 +10,7 @@ export const links = () => {
 };
 
 export const loader = async () => {
-    return getPosts(getPostsFromDB)
+    return getPosts(getPostsFromFS)
 }
 
 export default function Admin() {
@@ -28,7 +29,9 @@ export default function Admin() {
             ))}
             </ul>
         </nav>
-        <main>...</main>
+            <main>
+                <Outlet/ >
+        </main>
         </div>
   );
 }
